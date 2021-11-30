@@ -18,6 +18,6 @@
   {
       code: <Your Code>,
       filename: <Any Name>,
-      extension: <For now .py> #Maybe we add more languages like c++ or java
+      extension: <For now py> #Maybe we add more languages like c++ or java
   }
   ```
