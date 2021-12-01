@@ -12,6 +12,8 @@ def execute(request):
     code = data.get("code", "")
     filename = data.get("filename", "")
     extension = data.get("extension", "")
+    if not os.path.exists("temp"):
+        os.makedirs("temp")
     FILE = "temp/{}.{}".format(filename, extension)
     with open(FILE, "+w") as File:
         File.write(code)
@@ -23,17 +25,22 @@ def execute(request):
         universal_newlines=True,
         bufsize=0,
     )
-    os.remove(FILE)
+
     while execution.poll() is None:
         pass
     if execution.poll() == 1:
+        response = {"output": execution.stderr.readlines()}
+        os.remove(FILE)
         return Response(
-            {"output": execution.stderr.readlines()},
+            response,
             status=status.HTTP_406_NOT_ACCEPTABLE,
         )
     else:
+        response = {"output": execution.stdout.readlines()}
+        os.remove(FILE)
         return Response(
-            {"output": execution.stdout.readlines()}, status=status.HTTP_200_OK
+            response,
+            status=status.HTTP_200_OK
         )
 
 

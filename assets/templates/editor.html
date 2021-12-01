@@ -53,7 +53,11 @@
 
         Http.send(FD);
         Http.onreadystatechange = (e) => {
-            document.getElementById("output").innerHTML = Http.response["output"];
+            const response = Http.response;
+            if (response && "output" in response) {
+                document.getElementById("output").innerHTML = response["output"].join("<br/>");
+                console.log(response["output"].join("<br/>"))
+            }
         }
     }
 </script>
