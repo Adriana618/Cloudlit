@@ -21,3 +21,6 @@
       extension: <For now py> #Maybe we add more languages like c++ or java
   }
   ```
+
+## DigitalOcean Deploy
+The API is already deployed in DigitalOcean. The url is [http://167.172.2.112/cloudlit/python](http://167.172.2.112/cloudlit/python)

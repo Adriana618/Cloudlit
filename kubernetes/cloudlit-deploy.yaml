@@ -1,0 +1,26 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  namespace: default
+  name: cloudlit-django-api
+spec:
+  selector:
+    matchLabels:
+      app: cloudlit-django-api
+  template:
+    metadata:
+      labels:
+        app: cloudlit-django-api
+    spec:
+      containers:
+      - name: cloudlit-django-api
+        image: alonso139/cloudlit-django-api
+        command: ['python', 'manage.py', 'runserver', '0.0.0.0:8000']
+        envFrom:
+        - configMapRef:
+            name: api-config
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
